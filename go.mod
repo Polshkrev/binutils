@@ -1,4 +1,4 @@
-module github.com/Polshkrev/Binutils
+module github.com/Polshkrev/binutils
 
 go 1.23.0
 
