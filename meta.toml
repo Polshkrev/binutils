@@ -1,0 +1,23 @@
+[project]
+name = "binutils"
+author = "Polshkrev"
+description = "A collection of binary utilities."
+
+[project.version]
+name = "Initial"
+minor = 1
+
+[license]
+type = "MIT"
+path = "LICENSE"
+
+[urls]
+repository = "github.com/Polshkrev/binutils"
+
+[paths]
+readme = "README.md"
+
+[commands]
+script = ["build/build"]
+build = ["go", "build", "-o", "bin/which.exe", "cmd/which.go"]
+test = ["go", "test", "-v", "./tests"]
