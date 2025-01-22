@@ -4,7 +4,6 @@ author = "Polshkrev"
 description = "A collection of binary utilities."
 
 [project.version]
-name = "Initial"
 minor = 1
 
 [license]
@@ -12,7 +11,7 @@ type = "MIT"
 path = "LICENSE"
 
 [urls]
-repository = "github.com/Polshkrev/binutils"
+repository = "https://github.com/Polshkrev/binutils"
 
 [paths]
 readme = "README.md"
