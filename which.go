@@ -11,16 +11,15 @@ import (
 // Get the system path value of a given string executable.
 // Returns the path located in the system path.
 // If the given executable's path can not be obtained, an Exception is returned with an empty string.
-func which(programme string) (string, *gopolutils.Exception) {
+func which(programme string, path chan<- string, except chan<- *gopolutils.Exception) {
 	var result string
 	var err error
-	go func() {
-		result, err = exec.LookPath(programme)
-	}()
+	result, err = exec.LookPath(programme)
 	if err != nil {
-		return "", gopolutils.NewException(fmt.Sprintf("executable file '%s' not found in system path.", programme))
+		except <- gopolutils.NewException(fmt.Sprintf("executable file '%s' not found in system path.", programme))
 	}
-	return result, nil
+	path <- result
+	except <- nil
 }
 
 // Obtain the system path of a variadic list of executable names.
@@ -28,15 +27,19 @@ func which(programme string) (string, *gopolutils.Exception) {
 // If one of the executable paths can not be obtained, an Exception is returned with a nil data pointer.
 func Which(programmes ...string) (collections.View[string], *gopolutils.Exception) {
 	var programme string
+	var pathChannel chan string = make(chan string)
+	var exceptChannel chan *gopolutils.Exception = make(chan *gopolutils.Exception)
 	var results collections.Collection[string] = collections.NewArray[string]()
 	for _, programme = range programmes {
-		var result string
-		var except *gopolutils.Exception
-		result, except = which(programme)
+		go which(programme, pathChannel, exceptChannel)
+		var result string = <-pathChannel
+		var except *gopolutils.Exception = <-exceptChannel
 		if except != nil {
 			return nil, except
 		}
 		results.Append(result)
 	}
+	close(pathChannel)
+	close(exceptChannel)
 	return results, nil
 }
