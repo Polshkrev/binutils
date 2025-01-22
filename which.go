@@ -17,6 +17,7 @@ func which(programme string, path chan<- string, except chan<- *gopolutils.Excep
 	result, err = exec.LookPath(programme)
 	if err != nil {
 		except <- gopolutils.NewException(fmt.Sprintf("executable file '%s' not found in system path.", programme))
+		return
 	}
 	path <- result
 	except <- nil
@@ -35,6 +36,8 @@ func Which(programmes ...string) (collections.View[string], *gopolutils.Exceptio
 		var result string = <-pathChannel
 		var except *gopolutils.Exception = <-exceptChannel
 		if except != nil {
+			close(pathChannel)
+			close(exceptChannel)
 			return nil, except
 		}
 		results.Append(result)
