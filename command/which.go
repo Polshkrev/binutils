@@ -14,7 +14,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, gopolutils.NewException("No arguments provided.").Error())
 		os.Exit(1)
 	}
-	var paths collections.Collection[string]
+	var paths collections.View[string]
 	var except *gopolutils.Exception
 	paths, except = binutils.Which(os.Args[1:]...)
 	if except != nil {
