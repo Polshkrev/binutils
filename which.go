@@ -17,6 +17,7 @@ func which(programme string, path chan<- string, except chan<- *gopolutils.Excep
 	result, err = exec.LookPath(programme)
 	if err != nil {
 		except <- gopolutils.NewException(fmt.Sprintf("executable file '%s' not found in system path.", programme))
+		return
 	}
 	path <- result
 	except <- nil
@@ -31,6 +32,8 @@ func Which(programmes ...string) (collections.View[string], *gopolutils.Exceptio
 	var exceptChannel chan *gopolutils.Exception = make(chan *gopolutils.Exception)
 	var results collections.Collection[string] = collections.NewArray[string]()
 	for _, programme = range programmes {
+		defer close(pathChannel)
+		defer close(exceptChannel)
 		go which(programme, pathChannel, exceptChannel)
 		var result string = <-pathChannel
 		var except *gopolutils.Exception = <-exceptChannel
@@ -39,7 +42,7 @@ func Which(programmes ...string) (collections.View[string], *gopolutils.Exceptio
 		}
 		results.Append(result)
 	}
-	close(pathChannel)
-	close(exceptChannel)
+	// close(pathChannel)
+	// close(exceptChannel)
 	return results, nil
 }
