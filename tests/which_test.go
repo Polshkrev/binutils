@@ -21,6 +21,6 @@ func TestSingleWhichFailure(test *testing.T) {
 	var except *gopolutils.Exception
 	_, except = binutils.Which(path)
 	if except == nil {
-		test.Errorf("%s\n", except.Error())
+		test.Errorf("The single test case has returned a nil error.\n")
 	}
 }
