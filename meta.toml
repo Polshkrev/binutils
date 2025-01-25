@@ -19,5 +19,5 @@ readme = "README.md"
 
 [commands]
 script = ["build/build"]
-build = ["go", "build", "-o", "bin/which.exe", "cmd/which.go"]
+build = ["go", "build", "-o", "bin/which.exe", "command/which.go"]
 test = ["go", "test", "-v", "./tests"]
