@@ -1,8 +1,7 @@
-package main
+package binutils
 
 import (
 	"fmt"
-	"os"
 	"os/exec"
 
 	"github.com/Polshkrev/gopolutils"
@@ -51,22 +50,4 @@ func Which(programmes ...string) (collections.View[string], *gopolutils.Exceptio
 		results.Append(result)
 	}
 	return results, nil
-}
-
-func main() {
-	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, gopolutils.NewException("No arguments provided.").Error())
-		os.Exit(1)
-	}
-	var paths collections.View[string]
-	var except *gopolutils.Exception
-	paths, except = Which(os.Args[1:]...)
-	if except != nil {
-		fmt.Fprintln(os.Stderr, except.Error())
-		os.Exit(1)
-	}
-	var path string
-	for _, path = range paths.Collect() {
-		fmt.Println(path)
-	}
 }
