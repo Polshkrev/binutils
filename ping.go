@@ -22,8 +22,8 @@ func getResponse(url string, response chan<- *http.Response, errorChannel chan<-
 // Returns an http response.
 // If the http request fails, an Exception is returned with a nil data pointer.
 func ping(url string) (*http.Response, *gopolutils.Exception) {
-	var responseChannel chan *http.Response
-	var errorChannel chan error
+	var responseChannel chan *http.Response = make(chan *http.Response, 1)
+	var errorChannel chan error = make(chan error, 1)
 	go getResponse(url, responseChannel, errorChannel)
 	var response *http.Response = <-responseChannel
 	var responseError error = <-errorChannel
