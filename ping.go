@@ -34,7 +34,7 @@ func ping(url string) (*http.Response, *gopolutils.Exception) {
 }
 
 // Ping the status code of given urls.
-// Return a collection of http status codes.
+// Returns a collection of http status codes.
 // If the http request fails, an Exception is returned with a nil data pointer.
 func Ping(urls ...string) (collections.Collection[uint16], *gopolutils.Exception) {
 	var url string
