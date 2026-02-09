@@ -5,6 +5,7 @@ import (
 
 	"github.com/Polshkrev/gopolutils"
 	"github.com/Polshkrev/gopolutils/collections"
+	"github.com/Polshkrev/otvet"
 )
 
 // Concurrently send an http request to a given url.
@@ -20,7 +21,7 @@ func getResponse(url string, response chan<- *http.Response, errorChannel chan<-
 
 // Ping a given url.
 // Returns an http response.
-// If the http request fails, an Exception is returned with a nil data pointer.
+// If the http request fails, an [gopolutils.Exception] is returned with a nil data pointer.
 func ping(url string) (*http.Response, *gopolutils.Exception) {
 	var responseChannel chan *http.Response = make(chan *http.Response, 1)
 	var errorChannel chan error = make(chan error, 1)
@@ -35,18 +36,19 @@ func ping(url string) (*http.Response, *gopolutils.Exception) {
 
 // Ping the status code of given urls.
 // Returns a collection of http status codes.
-// If the http request fails, an Exception is returned with a nil data pointer.
-func Ping(urls ...string) (collections.Collection[uint16], *gopolutils.Exception) {
-	var url string
-	var codes collections.Collection[uint16] = collections.NewArray[uint16]()
-	for _, url = range urls {
+// If the http request fails, an [gopolutils.Exception] is returned with a nil data pointer.
+func Ping(urls ...string) (collections.Collection[otvet.StatusCode], *gopolutils.Exception) {
+	var codes collections.Collection[otvet.StatusCode] = collections.NewArray[otvet.StatusCode]()
+	var i int
+	for i = range urls {
+		var url string = urls[i] // Idiomatically more performant than direct access.
 		var response *http.Response
 		var except *gopolutils.Exception
 		response, except = ping(url)
 		if except != nil {
 			return nil, except
 		}
-		codes.Append(uint16(response.StatusCode))
+		codes.Append(otvet.StatusCode(response.StatusCode)) // ! If the status code is not in the enum list, this will panic.
 	}
 	return codes, nil
 }
