@@ -7,6 +7,7 @@ import (
 	"github.com/Polshkrev/binutils"
 	"github.com/Polshkrev/gopolutils"
 	"github.com/Polshkrev/gopolutils/collections"
+	"github.com/Polshkrev/otvet"
 )
 
 func main() {
@@ -14,9 +15,9 @@ func main() {
 		fmt.Fprintln(os.Stderr, gopolutils.NewException("No URLs provided.").Error())
 		os.Exit(1)
 	}
-	var statusCodes collections.Collection[uint16] = gopolutils.Must(binutils.Ping(os.Args[1:]...))
-	var code uint16
+	var statusCodes collections.Collection[otvet.StatusCode] = gopolutils.Must(binutils.Ping(os.Args[1:]...))
+	var code otvet.StatusCode
 	for _, code = range statusCodes.Collect() {
-		fmt.Println(code)
+		fmt.Println(gopolutils.Must(otvet.StatusText(code)))
 	}
 }
