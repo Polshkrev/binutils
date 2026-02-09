@@ -19,7 +19,7 @@ func sendRequest(programme string, path chan<- string, except chan<- error) {
 
 // Get the system path value of a given string executable.
 // Returns the path located in the system path.
-// If the given executable's path can not be obtained, an Exception is returned with an empty string.
+// If the given executable's path can not be obtained, an [gopolutils.Exception] is returned with an empty string.
 func which(programme string) (string, *gopolutils.Exception) {
 	var pathChannel chan string = make(chan string, 1)
 	var exceptChannel chan error = make(chan error, 1)
@@ -36,11 +36,12 @@ func which(programme string) (string, *gopolutils.Exception) {
 
 // Obtain the system path of a variadic list of executable names.
 // Returns a collection of systems paths from the given list of executable names.
-// If one of the executable paths can not be obtained, an Exception is returned with a nil data pointer.
+// If one of the executable paths can not be obtained, an [gopolutils.Exception] is returned with a nil data pointer.
 func Which(programmes ...string) (collections.View[string], *gopolutils.Exception) {
-	var programme string
 	var results collections.Collection[string] = collections.NewArray[string]()
-	for _, programme = range programmes {
+	var i int
+	for i = range programmes {
+		var programme string = programmes[i] // Idiomatically more performant than direct access.
 		var result string
 		var except *gopolutils.Exception
 		result, except = which(programme)
