@@ -5,6 +5,7 @@ import (
 	"os/exec"
 
 	"github.com/Polshkrev/gopolutils"
+	"github.com/Polshkrev/gopolutils/collections"
 	"github.com/Polshkrev/gopolutils/collections/safe"
 )
 
