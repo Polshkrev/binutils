@@ -15,8 +15,8 @@ func main() {
 		os.Exit(1)
 	}
 	var paths collections.View[string] = gopolutils.Must(binutils.Which(os.Args[1:]...))
-	var path string
-	for _, path = range paths.Collect() {
+	for i = range paths.Collect() {
+		var path string = paths.Collect()[i]
 		fmt.Println(path)
 	}
 }
