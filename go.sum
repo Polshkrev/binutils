@@ -1,2 +1,4 @@
-github.com/Polshkrev/gopolutils v1.11.0 h1:hgkiJD9pU6lLDWSsPK0U4gb/Gpt8TXlFGMCB052t0pA=
-github.com/Polshkrev/gopolutils v1.11.0/go.mod h1:kSt8I0n3VscQasxG8csTOQz7mpDB2XoijfjKlV8dqKk=
+github.com/Polshkrev/gopolutils v1.25.0 h1:gxeKphmq/XGQ18jsJ9J2on59xmuUKVIL7IW9ZQgs7WA=
+github.com/Polshkrev/gopolutils v1.25.0/go.mod h1:DOft1lCtrCN47ZcKtpoaf7RlxE7bKyw7uxUy2qTKT2A=
+github.com/Polshkrev/otvet v0.0.0-20251116185905-4fe762f188f0 h1:IhhO+FsQEkQ4lz7HqaF7pxN8B9nsqw9aVDuEtZ0t634=
+github.com/Polshkrev/otvet v0.0.0-20251116185905-4fe762f188f0/go.mod h1:bxlNSSW/E24JhCQvEA+59ohanDSNP9s5JpkQOysioLk=
