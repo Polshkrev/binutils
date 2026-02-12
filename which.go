@@ -5,7 +5,7 @@ import (
 	"os/exec"
 
 	"github.com/Polshkrev/gopolutils"
-	"github.com/Polshkrev/gopolutils/collections"
+	"github.com/Polshkrev/gopolutils/collections/safe"
 )
 
 // Concurrently look for the given executable in the system path.
@@ -38,7 +38,7 @@ func which(programme string) (string, *gopolutils.Exception) {
 // Returns a collection of systems paths from the given list of executable names.
 // If one of the executable paths can not be obtained, an [gopolutils.Exception] is returned with a nil data pointer.
 func Which(programmes ...string) (collections.View[string], *gopolutils.Exception) {
-	var results collections.Collection[string] = collections.NewArray[string]()
+	var results safe.Collection[string] = safe.NewArray[string]()
 	var i int
 	for i = range programmes {
 		var programme string = programmes[i] // Idiomatically more performant than direct access.
