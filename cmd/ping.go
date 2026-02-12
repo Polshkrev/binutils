@@ -15,7 +15,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, gopolutils.NewException("No URLs provided.").Error())
 		os.Exit(1)
 	}
-	var statusCodes safe.Collection[otvet.StatusCode] = gopolutils.Must(binutils.Ping(os.Args[1:]...))
+	var statusCodes collections.View[otvet.StatusCode] = gopolutils.Must(binutils.Ping(os.Args[1:]...))
 	var i int
 	for i = range statusCodes.Collect() {
 		var code otvet.StatusCode = statusCodes.Collect()[i]
