@@ -5,6 +5,7 @@ import (
 
 	"github.com/Polshkrev/gopolutils"
 	"github.com/Polshkrev/gopolutils/collections"
+	"github.com/Polshkrev/gopolutils/collections/safe"
 	"github.com/Polshkrev/otvet"
 )
 
@@ -37,8 +38,8 @@ func ping(url string) (*http.Response, *gopolutils.Exception) {
 // Ping the status code of given urls.
 // Returns a collection of http status codes.
 // If the http request fails, an [gopolutils.Exception] is returned with a nil data pointer.
-func Ping(urls ...string) (collections.Collection[otvet.StatusCode], *gopolutils.Exception) {
-	var codes collections.Collection[otvet.StatusCode] = collections.NewArray[otvet.StatusCode]()
+func Ping(urls ...string) (collections.View[otvet.StatusCode], *gopolutils.Exception) {
+	var codes safe.Collection[otvet.StatusCode] = safe.NewArray[otvet.StatusCode]()
 	var i int
 	for i = range urls {
 		var url string = urls[i] // Idiomatically more performant than direct access.
