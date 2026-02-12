@@ -6,7 +6,7 @@ import (
 
 	"github.com/Polshkrev/binutils"
 	"github.com/Polshkrev/gopolutils"
-	"github.com/Polshkrev/gopolutils/collections/safe"
+	"github.com/Polshkrev/gopolutils/collections"
 	"github.com/Polshkrev/otvet"
 )
 
