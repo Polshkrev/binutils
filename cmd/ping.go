@@ -21,4 +21,4 @@ func main() {
 		var code otvet.StatusCode = statusCodes.Collect()[i]
 		fmt.Println(gopolutils.Must(otvet.StatusToString(code)))
 	}
-}.
+}
