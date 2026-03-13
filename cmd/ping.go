@@ -19,6 +19,6 @@ func main() {
 	var i int
 	for i = range statusCodes.Collect() {
 		var code otvet.StatusCode = statusCodes.Collect()[i]
-		fmt.Println(gopolutils.Must(otvet.StatusText(code)))
+		fmt.Println(gopolutils.Must(otvet.StatusToString(code)))
 	}
 }
