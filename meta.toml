@@ -1,6 +1,6 @@
 [project]
 name = "binutils"
-author = "Polshkrev"
+author = { name = "Polshkrev" }
 description = "A collection of binary utilities."
 
 [project.version]
@@ -18,6 +18,5 @@ repository = "github.com/Polshkrev/binutils"
 readme = "README.md"
 
 [commands]
-script = ["build/build"]
-build = ["go", "build", "-o", "bin/which.exe", "command/which.go"]
-test = ["go", "test", "-v", "./tests"]
+script = ["bin/build"]
+test = ["go", "test", "-v", "./tests/..."]
