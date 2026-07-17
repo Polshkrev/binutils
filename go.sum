@@ -1,11 +1,9 @@
-github.com/BurntSushi/toml v1.4.0 h1:kuoIxZQy2WRRk1pttg9asf+WVv6tWQuBNVmK8+nqPr0=
-github.com/BurntSushi/toml v1.4.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=
-github.com/Polshkrev/binutils v0.0.0-20260212011615-bf60461b0b1d h1:5nS3IeoZEImGqVGQK+ogmYpdeX6gE4Hhkv9l7nOhrRQ=
-github.com/Polshkrev/binutils v0.0.0-20260212011615-bf60461b0b1d/go.mod h1:MAi+m8GcqRiLlVsD3/VoWJtnFgGvthEIJ9xtIgu9ZO8=
-github.com/Polshkrev/gopolutils v1.29.3 h1:/Ekxh74Uh6UoFYcRM4+P2wpVXIc1clqdR/hyn4VhKIE=
-github.com/Polshkrev/gopolutils v1.29.3/go.mod h1:DOft1lCtrCN47ZcKtpoaf7RlxE7bKyw7uxUy2qTKT2A=
-github.com/Polshkrev/goserialize v0.9.0 h1:PO+lJK1Xl87Ex5Iw51aaXudouYMkHdBYpKmiJkN4nhE=
-github.com/Polshkrev/goserialize v0.9.0/go.mod h1:Re27ZCs4+5NVSGEbcr4xdl3yyNmerVOGkQ+rjpRWImk=
+github.com/BurntSushi/toml v1.6.0 h1:dRaEfpa2VI55EwlIW72hMRHdWouJeRF7TPYhI+AUQjk=
+github.com/BurntSushi/toml v1.6.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=
+github.com/Polshkrev/gopolutils v1.37.0 h1:aWwP5KZk/yUWXJIX+yB1eICx6NWvvHFetEJZEXCW0ps=
+github.com/Polshkrev/gopolutils v1.37.0/go.mod h1:VN99j8xJdOMIu7AzzC2/GKrW3RzqblzhzCoLSzQGfLY=
+github.com/Polshkrev/goserialize v0.10.0 h1:yuEXy11YcrSMkwwRfLphwEGUlzwuSlf5vESs3d0eJvs=
+github.com/Polshkrev/goserialize v0.10.0/go.mod h1:MNr8B1/V3qtWRYBpSocvvVpS0JguibHnvc02ce34crc=
 github.com/Polshkrev/otvet v0.1.0 h1:lCrXsYvc+0L3d3duKVHN/Utj+EuCrnAYoVNHr7fKbLw=
 github.com/Polshkrev/otvet v0.1.0/go.mod h1:bxlNSSW/E24JhCQvEA+59ohanDSNP9s5JpkQOysioLk=
 github.com/trimmer-io/go-csv v1.0.0 h1:s1HhtyBDykRk//Nif5zrhLkBaCKNIizYWORnB8C7esE=
