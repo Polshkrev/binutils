@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"
 	"strings"
 	"time"
 
@@ -37,7 +36,7 @@ func trimExtension(path string) (string, *gopolutils.Exception) {
 }
 
 func splitFileName(path *fayl.Path) (*fayl.Path, *gopolutils.Exception) {
-	var pathString string = path.ToString()
+	var pathString string = path.String()
 	var suffix fayl.Suffix
 	var suffixException *gopolutils.Exception
 	suffix, suffixException = path.Suffix()
@@ -61,11 +60,11 @@ func splitFileName(path *fayl.Path) (*fayl.Path, *gopolutils.Exception) {
 	return fayl.PathFrom(stripped), nil
 }
 
-func constructTargetFileName(originalPath *fayl.Path, platform fayl.OS) (string, *gopolutils.Exception) {
+func constructTargetFileName(originalPath *fayl.Path, platform fayl.OperatingSystem) (string, *gopolutils.Exception) {
 	var result string
-	var folder string = filepath.Base(originalPath.ToString())
+	var folder string = filepath.Base(originalPath.String())
 	switch platform {
-	case fayl.WINDOWS:
+	case fayl.Windows:
 		var suffix string
 		var suffixException *gopolutils.Exception
 		suffix, suffixException = fayl.StringFromSuffix(fayl.Zip)
@@ -96,7 +95,7 @@ func positionalRangeToFiles(arguments []string, logger *gopolutils.Logger) ([]*f
 	switch len(arguments) {
 	case 0:
 		var rootPath *fayl.Path = fayl.NewPath()
-		logger.Log(fmt.Sprintf("Loading files from '%s'.", rootPath.ToString()), gopolutils.Info)
+		logger.Log(fmt.Sprintf("Loading files from '%s'.", rootPath.String()), gopolutils.Info)
 		var directory *fayl.Directory = fayl.NewDirectory(rootPath)
 		var readExcept *gopolutils.Exception = directory.Read()
 		if readExcept != nil {
@@ -106,7 +105,7 @@ func positionalRangeToFiles(arguments []string, logger *gopolutils.Logger) ([]*f
 	case 1:
 		var value string = flag.Arg(0)
 		var root *fayl.Path = fayl.PathFrom(value)
-		logger.Log(fmt.Sprintf("Loading files from '%s'.", root.ToString()), gopolutils.Info)
+		logger.Log(fmt.Sprintf("Loading files from '%s'.", root.String()), gopolutils.Info)
 		var directory *fayl.Directory = fayl.NewDirectory(root)
 		var readExcept *gopolutils.Exception = directory.Read()
 		if readExcept != nil {
@@ -118,7 +117,7 @@ func positionalRangeToFiles(arguments []string, logger *gopolutils.Logger) ([]*f
 		for i = range arguments {
 			var argument string = arguments[i]
 			var entry *fayl.Entry = fayl.NewEntry(fayl.PathFrom(argument))
-			logger.Log(fmt.Sprintf("Archiving '%s'.", entry.Path().ToString()), gopolutils.Info)
+			logger.Log(fmt.Sprintf("Archiving '%s'.", entry.Path().String()), gopolutils.Info)
 			result = append(result, entry)
 		}
 	}
@@ -130,12 +129,12 @@ func archive(source string, logger *gopolutils.Logger) *gopolutils.Exception {
 		var current *fayl.Path = fayl.NewPath()
 		var targetString string
 		var targetStringException *gopolutils.Exception
-		targetString, targetStringException = constructTargetFileName(current, fayl.OS(runtime.GOOS))
+		targetString, targetStringException = constructTargetFileName(current, fayl.CurrentOperatingSystem())
 		if targetStringException != nil {
 			return targetStringException
 		}
 		var target *fayl.Path = fayl.PathFrom(targetString)
-		logger.Log(fmt.Sprintf("Creating archive '%s'", target.ToString()), gopolutils.Info)
+		logger.Log(fmt.Sprintf("Creating archive '%s'", target.String()), gopolutils.Info)
 		var files []*fayl.Entry
 		var filesException *gopolutils.Exception
 		files, filesException = positionalRangeToFiles(flag.Args(), logger)
@@ -145,7 +144,7 @@ func archive(source string, logger *gopolutils.Logger) *gopolutils.Exception {
 		return fayl.ZipFolder(target, files...)
 	}
 	var destination *fayl.Path = fayl.PathFrom(source)
-	logger.Log(fmt.Sprintf("Creating archive '%s'", destination.ToString()), gopolutils.Info)
+	logger.Log(fmt.Sprintf("Creating archive '%s'", destination), gopolutils.Info)
 	var files []*fayl.Entry
 	var filesException *gopolutils.Exception
 	files, filesException = positionalRangeToFiles(flag.Args(), logger)
@@ -193,7 +192,7 @@ func setupLogger(name, dateFormat string, defaultLevel gopolutils.LoggingLevel, 
 			return nil, createException
 		}
 	}
-	var fileException *gopolutils.Exception = logger.AddFile(filename.ToString())
+	var fileException *gopolutils.Exception = logger.AddFile(filename.String())
 	if fileException != nil {
 		return nil, fileException
 	}
@@ -227,7 +226,7 @@ func main() {
 		os.Exit(0)
 	}
 	var path *fayl.Path = fayl.PathFrom(*source)
-	logger.Log(fmt.Sprintf("Extracting from '%s'.", path.ToString()), gopolutils.Info)
+	logger.Log(fmt.Sprintf("Extracting from '%s'.", path), gopolutils.Info)
 	var stripped *fayl.Path = gopolutils.Must(splitFileName(path))
 	var except *gopolutils.Exception = fayl.Extract(path, stripped)
 	if except != nil {
